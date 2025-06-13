@@ -1,15 +1,49 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+class CPU {
+    public int register = 0;
+    public int[] memory = {5, 10, 0};
+
+    private static final int LOAD = 1;
+    private static final int SAVE = 1;
+    private static final int ADD = 3;
+    private static final int SUB = 4;
+    private static final int HALT = 5;
+
+    private int[][] program = {
+            { LOAD, 0 }, // register = memory[0]
+            { ADD, 1 }, // register = register + memory[1]
+            { SAVE, 2 }, // memory[2] = register
+            { HALT, 0 } // stop program execution
+    };
+
+    public void executeProgram() {
+        int pc = 0;
+
+        while(true) {
+            int opcode = program[pc][0];
+            int operand = program[pc][1];
+
+            switch (opcode) {
+                case LOAD :
+                    register = memory[operand];
+                    System.out.println("LOAD : Loading memory[" + operand + "] (" + memory[0] + ") into register.");
+                    break;
+
+                case SAVE :
+                    memory[operand] = register;
+                    System.out.println("SAVE : Saving memory[" + operand + "] (" + memory[1] + ") from register.");
+                    break;
+
+                case ADD :
+                    break;
+
+                case HALT :
+                    break;
+            }
+        }
+    }
+}
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
-
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
     }
 }
