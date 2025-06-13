@@ -3,16 +3,16 @@ class CPU {
     public int[] memory = {5, 10, 0};
 
     private static final int LOAD = 1;
-    private static final int SAVE = 1;
+    private static final int SAVE = 2;
     private static final int ADD = 3;
     private static final int SUB = 4;
     private static final int HALT = 5;
 
     private int[][] program = {
-            { LOAD, 0 }, // register = memory[0]
-            { ADD, 1 }, // register = register + memory[1]
-            { SAVE, 2 }, // memory[2] = register
-            { HALT, 0 } // stop program execution
+            { LOAD, 0 },         // register = memory[0]
+            { ADD, 1 },         // register = register + memory[1]
+            { SAVE, 2 },         // memory[2] = register
+            { HALT, 0 }         // stop program execution
     };
 
     public void executeProgram() {
@@ -23,20 +23,13 @@ class CPU {
             int operand = program[pc][1];
 
             switch (opcode) {
-                case LOAD :
+                case LOAD:
                     register = memory[operand];
-                    System.out.println("LOAD : Loading memory[" + operand + "] (" + memory[0] + ") into register.");
+                    System.out.println("LOAD: Loading memory[" + operand + "] (" + memory[0] + ") into register.");
                     break;
-
-                case SAVE :
+                case SAVE:
                     memory[operand] = register;
-                    System.out.println("SAVE : Saving memory[" + operand + "] (" + memory[1] + ") from register.");
-                    break;
-
-                case ADD :
-                    break;
-
-                case HALT :
+                    System.out.println("SAVE: Saving memory[" + operand + "] (" + memory[0] + ") from register.");
                     break;
             }
         }
@@ -45,5 +38,6 @@ class CPU {
 
 public class Main {
     public static void main(String[] args) {
+
     }
 }
